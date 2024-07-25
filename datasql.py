@@ -115,13 +115,60 @@ except:
 # for i in a:
 #     print("{:<10}{:<16}{:<10}".format(i[0],i[1],i[2]))
 
-name=str(input("name"))
-a=con.execute("delete from student where  name='appu'")
-con.commit()
-a=con.execute("select * from student where name=?",(name,))
+# name=str(input("name"))
+# a=con.execute("delete from student where  name='appu'")
+# con.commit()
+# a=con.execute("select * from student where name=?",(name,))
+# print("{:<10}{:<16}{:<10}".format('name','age','mark'))
+# for i in a:
+#     print("{:<10}{:<16}{:<10}".format(i[0],i[1],i[2]))
+
+#To identify frst letter a:
+
+# a=con.execute("select * from student where name like 'a%'")
+# print("{:<10}{:<16}{:<10}".format('name','age','mark'))
+# for i in a:
+#     print("{:<10}{:<16}{:<10}".format(i[0],i[1],i[2]))
+
+#to identify last letter:
+
+# a=con.execute("select * from student where name like '%c'")
+# print("{:<10}{:<16}{:<10}".format('name','age','mark'))
+# for i in a:
+#     print("{:<10}{:<16}{:<10}".format(i[0],i[1],i[2]))
+
+
+#order BY:
+
+
+# a=con.execute("select * from student order by name desc")
+# print("{:<10}{:<16}{:<10}".format('name','age','mark'))
+# for i in a:
+#     print("{:<10}{:<16}{:<10}".format(i[0],i[1],i[2]))
+
+
+# age=int(input("age"))
+# name=str(input("name"))
+# mark=float(input("mark"))
+# con.execute("insert into student(age,name,mark)values(?,?,?)",(age,name,mark))
+# con.commit()
+
+
+
+#group by:
+
+    #count:
+a=con.execute("select name ,count(mark)from student group by name")
 print("{:<10}{:<16}{:<10}".format('name','age','mark'))
 for i in a:
-    print("{:<10}{:<16}{:<10}".format(i[0],i[1],i[2]))
+    print(i)
+
+    #min:
+a=con.execute("select name ,min(mark)from student group by name")
+print("{:<10}{:<16}{:<10}".format('name','age','mark'))
+for i in a:
+    print(i) 
+
 
 
 

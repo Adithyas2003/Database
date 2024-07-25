@@ -1,7 +1,7 @@
 import sqlite3
 con=sqlite3.connect("employee1.db")
 try:
-    con.execute("create table staff(name text,position text,age int, salary real) ")
+    con.execute("create table staff(id int,name text,position text,age int, salary real)")
 except:
        pass
 while True:
@@ -12,15 +12,29 @@ while True:
     print("5.delete")
     ch=input("enter your choice")
     if ch=='1':
+         id=int(input("enter id:"))
          name=input("enter name:")
          position=input("enter position:")
          age=int(input("enter the age:"))
          salary=float(input("enter the salary:"))
-         con.execute("insert into staff(name,position,age,salary)values('kiran','HR',28,30000)")
+         con.execute("insert into staff(id,name,position,age,salary)values(?,?,?,?,?)",(id,name,position,age,salary))
          con.commit()
-         print("Employee Added Successfully")
+         print("staff Added Successfully")
     elif ch=='2':
-         name=input("enter the name:")
+        update_name=str(input("enter the staff name to update"))
+        con.execute("select * from staff")
+        condition_age = 30
+        update_salary = 70000.0
+        con.execute("UPDATE staff SET  salary=? WHERE age=?", (update_name,update_salary))
+        con.commit()
+        print("staff updated successfully")
+
+
+
+    
+
+
+
 
 
       
