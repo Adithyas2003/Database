@@ -1,5 +1,5 @@
 import sqlite3
-con=sqlite3.connect("employee1.db")
+con=sqlite3.connect("employee.db")
 try:
     con.execute("create table staff(id int,name text,position text,age int, salary real)")
 except:
@@ -20,16 +20,38 @@ while True:
          con.execute("insert into staff(id,name,position,age,salary)values(?,?,?,?,?)",(id,name,position,age,salary))
          con.commit()
          print("staff Added Successfully")
-    elif ch=='2':
-        update_name=str(input("enter the staff name to update"))
-        con.execute("select * from staff")
-        condition_age = 30
-        update_salary = 70000.0
-        con.execute("UPDATE staff SET  salary=? WHERE age=?", (update_name,update_salary))
+    
+
+    elif ch == '2':
+        name_to_update = input("Enter name of staff member to update: ")
+        new_salary = float(input("Enter new salary: "))
+
+        update_query = """
+            UPDATE staff 
+            SET salary = ?
+            WHERE name = ?
+        """
+        con.execute(update_query, (new_salary, name_to_update))
         con.commit()
-        print("staff updated successfully")
+        print("Staff updated successfully.")
+    elif ch == '3':
+        con.execute('SELECT * FROM employees')
+        employees = con.fetchall()
+        for employee in employees:
+            print(f"ID: {employee[0]}, Name: {employee[1]}, Position: {employee[2]}, Salary: {employee[3]}")
 
+    elif ch == '4':
+        emp_id = int(input("Enter employee ID to delete: "))
+        con.execute('DELETE FROM employees WHERE id = ?', (emp_id,))
+        con.commit()
+        print("Employee deleted successfully.")
 
+    elif ch == '5':
+        print("Exiting...")
+        break
+
+    else:
+        print("Invalid choice. Please try again.")
 
     
 
