@@ -1,5 +1,5 @@
 import sqlite3
-con=sqlite3.connect("employee.db")
+con=sqlite3.connect("employee1.db")
 try:
     con.execute("create table staff(name text,position text,age int, salary real) ")
 except:
